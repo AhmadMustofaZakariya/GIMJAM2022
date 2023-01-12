@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushButtonInteract : MonoBehaviour, IInteractable
+public class PickObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private string interactText;
     private Animator animator;
-    private bool isOpen;
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
-    public void ToggleDoor()
+    public void Pick()
     {
-        isOpen = !isOpen;
-        //animator.SetBool("IsOpen", isOpen);
-        Debug.Log("Door is Open");
+        Debug.Log("Object Picked");
+        //play cutsceene
+
+        //play bgm meme
     }
 
     public string GetInteractText()
@@ -25,6 +25,6 @@ public class PushButtonInteract : MonoBehaviour, IInteractable
 
     public void Interact(Transform interactorTransform)
     {
-        ToggleDoor();
+        Pick();
     }
 }
