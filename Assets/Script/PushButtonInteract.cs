@@ -14,8 +14,7 @@ public class PushButtonInteract : MonoBehaviour, IInteractable
     public void ToggleDoor()
     {
         isOpen = !isOpen;
-        //animator.SetBool("IsOpen", isOpen);
-        Debug.Log("Door is Open");
+        animator.SetBool("IsOpen", isOpen);
     }
 
     public string GetInteractText()

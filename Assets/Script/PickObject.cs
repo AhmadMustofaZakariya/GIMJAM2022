@@ -6,11 +6,11 @@ public class PickObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private string interactText;
     private Animator animator;
-    private GameObject videoPlayer;
+    public GameObject videoPlayer;
     public int timeStop;
     private void Awake()
     {
-        
+        videoPlayer.SetActive(false);
     }
     public void Pick()
     {
