@@ -5,17 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float jumpForce = 5f;
-    [SerializeField] float speed = 0.5f;
-
+    [SerializeField] float jumpForce = 4f;
+    [SerializeField] float speed = 0.2f;
+    private Animator animator;
     private Rigidbody rb;
     private PlayerInput playerInput;
     private PlayerInputActions playerInputActions;
-
+    private PickObject pickObject;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponent<Animator>();
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -28,7 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.canceled)
         {
-            speed = 0.5f;
+            speed = 0.2f;
+            animator.SetBool("running", false);
         }
     }
 
@@ -36,7 +38,8 @@ public class PlayerController : MonoBehaviour
     {
         if(context.performed)
         {
-            speed = 2f;
+            speed = 0.3f;
+            animator.SetBool("running", true);
         }
     }
 
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetBool("jump", true);
         }
     }
 
@@ -58,6 +62,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
         }
         rb.AddForce(new Vector3(inputVector.x, 0, inputVector.y) * speed, ForceMode.Impulse);
+
+        animator.SetFloat("speed", rb.velocity.magnitude);
     }
     
 }

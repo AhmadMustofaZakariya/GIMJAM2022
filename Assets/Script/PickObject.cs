@@ -6,16 +6,18 @@ public class PickObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private string interactText;
     private Animator animator;
+    private GameObject videoPlayer;
+    public int timeStop;
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        
     }
     public void Pick()
     {
         Debug.Log("Object Picked");
         //play cutsceene
-
-        //play bgm meme
+        videoPlayer.SetActive(true);
+        Destroy(videoPlayer, timeStop);
     }
 
     public string GetInteractText()
